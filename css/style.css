@@ -1,3 +1,4 @@
+/* Global Reset */
 * {
   margin: 0;
   padding: 0;
@@ -29,11 +30,11 @@ body {
   font-weight: bold;
 }
 
-.logo-text {
+/* Skin */
+.text-white {
   color: #fff;
 }
-
-.highlight {
+.text-highlight {
   color: #4da6ff;
 }
 
@@ -44,12 +45,16 @@ body {
 }
 
 .nav-links li a {
+  padding: 0.4rem;
+  border-radius: 0.5rem;
+}
+
+/* Skin */
+.nav-color {
   text-decoration: none;
   color: #ccc;
   font-weight: 600;
   font-size: 14px;
-  padding: 0.4rem;
-  border-radius: 0.5rem;
 }
 
 .nav-links li a.active,
@@ -65,7 +70,6 @@ body {
   display: flex;
   align-items: center;
   color: #fff;
-  /* margin-top: 60px;  */
 }
 
 .hero-img {
@@ -108,11 +112,14 @@ body {
 .btn {
   display: inline-block;
   padding: 10px 20px;
+  border-radius: 4px;
+}
+
+.btn-secondary {
   background: #fff;
   color: #000;
   font-weight: bold;
   text-decoration: none;
-  border-radius: 4px;
 }
 
 /* Trending */
