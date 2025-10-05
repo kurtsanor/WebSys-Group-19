@@ -1,4 +1,8 @@
-/* Global Reset */
+/* ===============================
+   Global Reset and Base Styles
+   - Removes default browser spacing
+   - Applies consistent box model and global font
+================================= */
 * {
   margin: 0;
   padding: 0;
@@ -12,7 +16,11 @@ body {
   color: #fff;
 }
 
-/* Navbar */
+/* ===============================
+   Navbar Block
+   - Fixed top navigation bar
+   - Uses flex layout for alignment
+================================= */
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -25,45 +33,50 @@ body {
   z-index: 10;
 }
 
-.logo {
+/* Navbar elements */
+.navbar__logo {
   font-size: 1.5rem;
   font-weight: bold;
 }
 
-/* Skin */
-.text-white {
-  color: #fff;
-}
-.text-highlight {
-  color: #4da6ff;
+.navbar__logo-text {
+  color: white;
 }
 
-.nav-links {
+/* Horizontal navigation list */
+.navbar__list {
   list-style: none;
   display: flex;
   gap: 20px;
 }
 
-.nav-links li a {
+/* Link styling for menu items */
+.navbar__link {
   padding: 0.4rem;
   border-radius: 0.5rem;
-}
-
-/* Skin */
-.nav-color {
   text-decoration: none;
   color: #ccc;
   font-weight: 600;
   font-size: 14px;
 }
 
-.nav-links li a.active,
-.nav-links li a:hover {
+/* Navbar modifiers for visual variation */
+.navbar__logo-text--highlight {
+  color: #4da6ff;
+}
+
+/* Active or hovered navigation link */
+.navbar__link--active,
+.navbar__link:hover {
   color: #fff;
   background-color: rgb(41, 41, 41);
 }
 
-/* Hero Section */
+/* ===============================
+   Hero Section Block
+   - Large banner area with image and overlay
+   - Highlights featured movie or show
+================================= */
 .hero {
   position: relative;
   height: 80vh;
@@ -72,17 +85,8 @@ body {
   color: #fff;
 }
 
-.hero-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: -2;
-}
-
-.hero-overlay {
+/* Overlay for gradient fade effect */
+.hero__overlay {
   position: absolute;
   top: 0;
   left: 0;
@@ -92,68 +96,98 @@ body {
   z-index: -1;
 }
 
-.hero-content {
+/* Background image for hero section */
+.hero__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -2;
+}
+
+/* Text and button container */
+.hero__content {
   max-width: 600px;
   padding: 0 40px;
 }
 
-.hero-title {
+/* Headline text */
+.hero__title {
   font-size: 2.5rem;
   font-weight: 900;
   margin-bottom: 20px;
 }
 
-.hero-description {
+/* Descriptive paragraph text */
+.hero__description {
   font-size: 1rem;
   margin-bottom: 20px;
   line-height: 1.5;
 }
 
-.btn {
+/* Call-to-action button inside hero */
+.hero__button--primary {
   display: inline-block;
   padding: 10px 20px;
   border-radius: 4px;
-}
-
-.btn-secondary {
   background: #fff;
   color: #000;
   font-weight: bold;
   text-decoration: none;
 }
 
-/* Trending */
+/* ===============================
+   Trending Section Block
+   - Displays trending movies or shows
+   - Uses grid layout for thumbnails
+================================= */
 .trending {
   padding: 40px;
 }
 
-.trending h2 {
+/* Section heading with left border highlight */
+.trending__title {
   font-size: 1.5rem;
   margin-bottom: 20px;
   border-left: 4px solid #4da6ff;
   padding-left: 10px;
 }
 
-.trending-grid {
+/* Responsive grid for movie cards */
+.trending__grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 20px;
 }
 
-.card img {
+/* Thumbnail image inside each trending card */
+.trending__image {
   width: 100%;
   border-radius: 8px;
   display: block;
 }
 
-.search-section {
-  margin-top: 4rem;
+/* ===============================
+   Movies Section Block
+   - Contains search, filters, cards, and pagination
+================================= */
+.movies {
+  margin-left: 3rem;
+  margin-right: 3rem;
+  margin-top: 3rem;
+}
+
+/* Search bar alignment */
+.movies__search {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.search-bar {
+/* Search input styling */
+.movies__search-bar {
   border: solid 1px rgb(71, 71, 71);
   padding: 0.6rem;
   background-color: #2e2e2e;
@@ -162,12 +196,8 @@ body {
   color: white;
 }
 
-.movies-main {
-  margin-left: 3rem;
-  margin-right: 3rem;
-}
-
-.filter-list {
+/* Filter list container */
+.movies__filter-list {
   margin-top: 1rem;
   display: flex;
   flex-direction: row;
@@ -177,7 +207,8 @@ body {
   border-radius: 0.5rem;
 }
 
-.filter-anchor {
+/* Individual filter item */
+.movies__filter-item {
   padding: 0.4rem;
   flex: 1;
   text-align: center;
@@ -186,11 +217,13 @@ body {
   font-weight: 500;
 }
 
-.filter-anchor.active {
+/* Highlighted filter (active state) */
+.movies__filter-item--highlight {
   background-color: #1188ff;
 }
 
-.movie-section {
+/* Movie grid layout for cards */
+.movies__grid {
   margin-top: 1rem;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -198,78 +231,89 @@ body {
   margin-bottom: 3rem;
 }
 
-.card-container {
+/* Movie card container */
+.movies__card {
   border: solid 1px rgb(71, 71, 71);
   border-radius: 1rem;
 }
 
-.card-img {
+/* Movie card thumbnail */
+.movies__card-image {
   height: 200px;
   border-top-left-radius: 1rem;
   border-top-right-radius: 1rem;
   width: 100%;
 }
 
-.card-main {
+/* Movie card content wrapper */
+.movies__card-content {
   margin: 1rem;
 }
 
-.card-main p {
+/* Movie title text */
+.movies__card-title {
+  font-size: 17px;
+}
+
+/* Short movie description */
+.movies__card-description {
   margin-top: 1rem;
   color: gray;
   font-size: 15px;
 }
 
-.card-main h3 {
-  font-size: 17px;
-}
-
-.bottom-section {
+/* Footer area inside card (date + favorite button) */
+.movies__card-footer {
   margin-top: 1rem;
   display: flex;
   justify-content: space-between;
 }
 
-.bottom-section span {
+/* Movie release date text */
+.movies__card-date {
   font-size: 14px;
 }
 
-.favorite-btn {
+/* Favorite (heart) button styling */
+.movies__card-favorite-btn {
   background-color: rgb(71, 71, 71);
   border: none;
   padding: 0.2rem;
   border-radius: 0.3rem;
 }
 
-.favorites-h1 {
-  margin-top: 2rem;
-}
-
-.pagination-section {
+/* Pagination container */
+.movies__pagination {
   display: flex;
   justify-content: center;
   align-items: center;
   margin-bottom: 3rem;
-  /* border: solid 1px; */
 }
 
-.pagination-list {
+/* List of pagination links */
+.movies__pagination-list {
   display: flex;
   list-style: none;
   gap: 8px;
 }
 
-.pagination-list a {
+/* Individual pagination button */
+.movies__pagination-link {
   padding: 8px 13px;
   border: solid 1px rgb(102, 102, 102);
   border-radius: 5px;
 }
 
-.pagination-list a.active {
+/* Active pagination state */
+.movies__pagination-link--active {
   background-color: #1188ff;
 }
 
-.site-footer {
+/* ===============================
+   Footer Block
+   - Site footer with text information
+================================= */
+.footer {
   background: #1a1a1a;
   color: #fff;
   display: flex;
@@ -281,6 +325,15 @@ body {
   height: 15vh;
 }
 
+/* Footer text element */
+.footer__text {
+  font-size: 14px;
+}
+
+/* ===============================
+   Responsive Adjustments
+   - Adjusts movie grid for smaller screens
+================================= */
 @media (max-width: 1024px) {
   .movie-section {
     grid-template-columns: repeat(2, 1fr);

@@ -15,51 +15,63 @@
   <body>
     <!-- Navbar -->
     <header class="navbar">
-      <div class="logo">
-        <span class="logo-icon">🎬</span>
-        <span class="text-white"
-          >Watch<span class="text-highlight">This</span></span
+      <div>
+        <span class="navbar__logo">🎬</span>
+        <span class="navbar__logo navbar__logo-text"
+          >Watch<span class="navbar__logo-text--highlight">This</span></span
         >
       </div>
       <nav>
-        <ul class="nav-links">
-          <li><a href="index.html" class="nav-color active">Home</a></li>
-          <li><a href="movies.html" class="nav-color">Movies</a></li>
-          <li><a href="tvshows.html" class="nav-color">TV Shows</a></li>
-          <li><a href="favorites.html" class="nav-color">Favorites</a></li>
+        <ul class="navbar__list">
+          <li>
+            <a href="index.html" class="navbar__link navbar__link--active"
+              >Home</a
+            >
+          </li>
+          <li><a href="movies.html" class="navbar__link">Movies</a></li>
+          <li><a href="tvshows.html" class="navbar__link">TV Shows</a></li>
+          <li><a href="favorites.html" class="navbar__link">Favorites</a></li>
         </ul>
       </nav>
     </header>
 
     <!-- Hero Section -->
     <section class="hero">
-      <div class="hero-overlay"></div>
-      <img src="images/f4.jpg" alt="Fantastic 4" class="hero-img" />
-      <div class="hero-content">
-        <h1 class="hero-title">THE FANTASTIC 4: FIRST STEPS</h1>
-        <p class="hero-description">
+      <div class="hero__overlay"></div>
+      <img src="images/f4.jpg" alt="Fantastic 4" class="hero__image" />
+      <div class="hero__content">
+        <h1 class="hero__title">THE FANTASTIC 4: FIRST STEPS</h1>
+        <p class="hero__description">
           Against the vibrant backdrop of a 1960s-inspired, retro-futuristic
           world, Marvel's First Family is forced to balance their roles as
           heroes with the strength of their family bond, while defending Earth
           from a ravenous space god called Galactus...
         </p>
-        <a href="#" class="btn btn-secondary">▶ Watch</a>
+        <a href="#" class="hero__button--primary">▶ Watch</a>
       </div>
     </section>
 
     <!-- Trending Section -->
     <section class="trending">
-      <h2>Trending</h2>
-      <div class="trending-grid">
-        <div class="card"><img src="images/f4.jpg" alt="Movie 1" /></div>
-        <div class="card"><img src="images/f4.jpg" alt="Movie 2" /></div>
-        <div class="card"><img src="images/f4.jpg" alt="Movie 3" /></div>
-        <div class="card"><img src="images/f4.jpg" alt="Movie 4" /></div>
+      <h2 class="trending__title">Trending</h2>
+      <div class="trending__grid">
+        <div class="trending__card">
+          <img src="images/f4.jpg" alt="Movie 1" class="trending__image" />
+        </div>
+        <div class="trending__card">
+          <img src="images/f4.jpg" alt="Movie 2" class="trending__image" />
+        </div>
+        <div class="trending__card">
+          <img src="images/f4.jpg" alt="Movie 3" class="trending__image" />
+        </div>
+        <div class="trending__card">
+          <img src="images/f4.jpg" alt="Movie 4" class="trending__image" />
+        </div>
       </div>
     </section>
 
-    <footer class="site-footer">
-      &copy; 2025 WatchThis. All rights reserved.
+    <footer class="footer">
+      <p class="footer__text">&copy; 2025 WatchThis. All rights reserved.</p>
     </footer>
   </body>
 </html>
