@@ -335,13 +335,13 @@ body {
    - Adjusts movie grid for smaller screens
 ================================= */
 @media (max-width: 1024px) {
-  .movie-section {
+  .movies__grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media (max-width: 628px) {
-  .movie-section {
+  .movies__grid {
     grid-template-columns: repeat(1, 1fr);
   }
 }
