@@ -10,31 +10,52 @@
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap"
       rel="stylesheet"
     />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
     <!-- Navbar -->
-    <header class="navbar">
+    <header class="navbar navbar-expand-lg">
       <div>
         <span class="navbar__logo">🎬</span>
-        <span class="navbar__logo navbar__logo-text"
-          >Watch<span class="navbar__logo-text--highlight">This</span></span
-        >
+        <a href="#" class="navbar-brand">
+          <span class="navbar__logo navbar__logo-text"
+            >Watch<span class="navbar__logo-text--highlight">This</span></span
+          >
+        </a>
       </div>
-      <nav>
-        <ul class="navbar__list">
-          <li>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <nav class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar__list navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
             <a href="index.html" class="navbar__link">Home</a>
           </li>
-          <li>
+          <li class="nav-item">
             <a href="movies.html" class="navbar__link">Movies</a>
           </li>
-          <li>
+          <li class="nav-item">
             <a href="tvshows.html" class="navbar__link navbar__link--active"
               >TV Shows</a
             >
           </li>
-          <li><a href="favorites.html" class="navbar__link">Favorites</a></li>
+          <li class="nav-item">
+            <a href="favorites.html" class="navbar__link">Favorites</a>
+          </li>
         </ul>
       </nav>
     </header>
@@ -45,177 +66,75 @@
           class="movies__search-bar"
           type="text"
           placeholder="Enter movie title"
+          id="search-bar"
         />
       </section>
 
       <section class="movies__filter">
         <ul class="movies__filter-list">
-          <li class="movies__filter-item movies__filter-item--highlight">
+          <li
+            class="movies__filter-item movies__filter-item--highlight"
+            data-genreId="0"
+          >
             <a>All</a>
           </li>
-          <li class="movies__filter-item"><a>Action</a></li>
-          <li class="movies__filter-item"><a>Comedy</a></li>
-          <li class="movies__filter-item"><a>Drama</a></li>
-          <li class="movies__filter-item"><a>Horror</a></li>
-          <li class="movies__filter-item"><a>Romance</a></li>
+          <li class="movies__filter-item" data-genreId="28">
+            <a>Action</a>
+          </li>
+          <li class="movies__filter-item" data-genreId="35">
+            <a>Comedy</a>
+          </li>
+          <li class="movies__filter-item" data-genreId="18"><a>Drama</a></li>
+          <li class="movies__filter-item" data-genreId="27">
+            <a>Horror</a>
+          </li>
+          <li class="movies__filter-item" data-genreId="10749">
+            <a>Romance</a>
+          </li>
         </ul>
       </section>
 
       <!-- Movies grid section -->
-      <section class="movies__grid">
-        <div class="movies__card">
-          <img class="movies__card-image" src="images/f4.jpg" />
-          <section class="movies__card-content">
-            <h3 class="movies__card-title">Fantastic 4: First Steps</h3>
-            <p class="movies__card-description">
-              Against the vibrant backdrop of a 1960s-inspired, retro-futuristic
-              world, Marvel's First Family is forced to balance their roles as
-              heroes with the strength of their family
-            </p>
-            <div class="movies__card-footer">
-              <span class="movies__card-date">July 2025</span>
-              <button class="movies__card-favorite-btn">❤️</button>
-            </div>
-          </section>
-        </div>
-
-        <div class="movies__card">
-          <img class="movies__card-image" src="images/f4.jpg" />
-          <section class="movies__card-content">
-            <h3 class="movies__card-title">Fantastic 4: First Steps</h3>
-            <p class="movies__card-description">
-              Against the vibrant backdrop of a 1960s-inspired, retro-futuristic
-              world, Marvel's First Family is forced to balance their roles as
-              heroes with the strength of their family
-            </p>
-            <div class="movies__card-footer">
-              <span class="movies__card-date">July 2025</span>
-              <button class="movies__card-favorite-btn">❤️</button>
-            </div>
-          </section>
-        </div>
-
-        <div class="movies__card">
-          <img class="movies__card-image" src="images/f4.jpg" />
-          <section class="movies__card-content">
-            <h3 class="movies__card-title">Fantastic 4: First Steps</h3>
-            <p class="movies__card-description">
-              Against the vibrant backdrop of a 1960s-inspired, retro-futuristic
-              world, Marvel's First Family is forced to balance their roles as
-              heroes with the strength of their family
-            </p>
-            <div class="movies__card-footer">
-              <span class="movies__card-date">July 2025</span>
-              <button class="movies__card-favorite-btn">❤️</button>
-            </div>
-          </section>
-        </div>
-
-        <div class="movies__card">
-          <img class="movies__card-image" src="images/f4.jpg" />
-          <section class="movies__card-content">
-            <h3 class="movies__card-title">Fantastic 4: First Steps</h3>
-            <p class="movies__card-description">
-              Against the vibrant backdrop of a 1960s-inspired, retro-futuristic
-              world, Marvel's First Family is forced to balance their roles as
-              heroes with the strength of their family
-            </p>
-            <div class="movies__card-footer">
-              <span class="movies__card-date">July 2025</span>
-              <button class="movies__card-favorite-btn">❤️</button>
-            </div>
-          </section>
-        </div>
-
-        <div class="movies__card">
-          <img class="movies__card-image" src="images/f4.jpg" />
-          <section class="movies__card-content">
-            <h3 class="movies__card-title">Fantastic 4: First Steps</h3>
-            <p class="movies__card-description">
-              Against the vibrant backdrop of a 1960s-inspired, retro-futuristic
-              world, Marvel's First Family is forced to balance their roles as
-              heroes with the strength of their family
-            </p>
-            <div class="movies__card-footer">
-              <span class="movies__card-date">July 2025</span>
-              <button class="movies__card-favorite-btn">❤️</button>
-            </div>
-          </section>
-        </div>
-        <div class="movies__card">
-          <img class="movies__card-image" src="images/f4.jpg" />
-          <section class="movies__card-content">
-            <h3 class="movies__card-title">Fantastic 4: First Steps</h3>
-            <p class="movies__card-description">
-              Against the vibrant backdrop of a 1960s-inspired, retro-futuristic
-              world, Marvel's First Family is forced to balance their roles as
-              heroes with the strength of their family
-            </p>
-            <div class="movies__card-footer">
-              <span class="movies__card-date">July 2025</span>
-              <button class="movies__card-favorite-btn">❤️</button>
-            </div>
-          </section>
-        </div>
-        <div class="movies__card">
-          <img class="movies__card-image" src="images/f4.jpg" />
-          <section class="movies__card-content">
-            <h3 class="movies__card-title">Fantastic 4: First Steps</h3>
-            <p class="movies__card-description">
-              Against the vibrant backdrop of a 1960s-inspired, retro-futuristic
-              world, Marvel's First Family is forced to balance their roles as
-              heroes with the strength of their family
-            </p>
-            <div class="movies__card-footer">
-              <span class="movies__card-date">July 2025</span>
-              <button class="movies__card-favorite-btn">❤️</button>
-            </div>
-          </section>
-        </div>
-        <div class="movies__card">
-          <img class="movies__card-image" src="images/f4.jpg" />
-          <section class="movies__card-content">
-            <h3 class="movies__card-title">Fantastic 4: First Steps</h3>
-            <p class="movies__card-description">
-              Against the vibrant backdrop of a 1960s-inspired, retro-futuristic
-              world, Marvel's First Family is forced to balance their roles as
-              heroes with the strength of their family
-            </p>
-            <div class="movies__card-footer">
-              <span class="movies__card-date">July 2025</span>
-              <button class="movies__card-favorite-btn">❤️</button>
-            </div>
-          </section>
-        </div>
-      </section>
-
-      <section class="movies__pagination">
-        <div>
-          <ul class="movies__pagination-list">
-            <li>
-              <a class="movies__pagination-link movies__pagination-link--active"
-                >1</a
-              >
-            </li>
-            <li>
-              <a class="movies__pagination-link">2</a>
-            </li>
-            <li>
-              <a class="movies__pagination-link">3</a>
-            </li>
-            <li>
-              <a class="movies__pagination-link">4</a>
-            </li>
-            <li>
-              <a class="movies__pagination-link">5</a>
-            </li>
-          </ul>
-        </div>
-      </section>
+      <section class="movies__grid" id="movies-grid"></section>
     </main>
+
+    <section class="movies__pagination">
+      <nav aria-label="Page navigation example">
+        <ul class="pagination">
+          <li class="page-item">
+            <a
+              class="page-link text-light border-secondary active left"
+              href="#"
+              >1</a
+            >
+          </li>
+          <li class="page-item">
+            <a
+              class="page-link bg-dark text-light border-secondary middle"
+              href="#"
+              >2</a
+            >
+          </li>
+          <li class="page-item">
+            <a
+              class="page-link bg-dark text-light border-secondary right"
+              href="#"
+              >3</a
+            >
+          </li>
+        </ul>
+      </nav>
+    </section>
 
     <footer class="footer">
       <p class="footer__text">&copy; 2025 WatchThis. All rights reserved.</p>
     </footer>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+      crossorigin="anonymous"
+    ></script>
+    <script src="js/tvshows.js" type="module"></script>
   </body>
 </html>
