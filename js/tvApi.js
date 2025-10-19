@@ -26,3 +26,17 @@ export async function searchShowsByNameAndPage(searchQuery, page) {
     console.log(error);
   }
 }
+
+export async function getTrailerByIdAndType(movieId, type) {
+  const url = `https://api.themoviedb.org/3/${type}/${encodeURIComponent(
+    movieId
+  )}/videos?api_key=${encodeURIComponent(API_KEY)}&language=en-US`;
+
+  try {
+    const res = await fetch(url);
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+}

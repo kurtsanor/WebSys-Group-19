@@ -1,10 +1,9 @@
-import { getPlayingNowMovies } from "./movieApi.js";
+import { getPlayingNowMovies, getTrailerByIdAndType } from "./movieApi.js";
 
 const heroSection = document.getElementById("hero-section");
 
 const res = await getPlayingNowMovies();
 const featuredMovie = res.results.splice(0, 1)[0];
-console.log(featuredMovie);
 
 heroSection.innerHTML = "";
 const hero = document.createElement("div");
@@ -18,9 +17,27 @@ hero.innerHTML = `
         <p class="hero__description">
           ${featuredMovie.overview}
         </p>
-        <a href="#" class="hero__button--primary">▶ Watch</a>
+        <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" class="hero__button--primary">▶ Watch</a>
       </div>
       `;
+
+const imageCard = hero.querySelector(".hero__button--primary");
+imageCard.addEventListener("click", async () => {
+  const url = await getTrailerUrl(featuredMovie);
+  const body = modalElement.querySelector(".modal-body");
+  body.innerHTML = `
+        <iframe
+          src="https://www.youtube.com/embed/${url}"
+          width="100%"
+          height="400px"
+          title="YouTube video player"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen
+        ></iframe>
+      `;
+});
+
 heroSection.appendChild(hero);
 
 function chunkArray(array, size) {
@@ -51,11 +68,28 @@ function renderCarousel(items) {
 
       col.innerHTML = `
         <div class="card">
-          <img src=${`https://image.tmdb.org/t/p/w500/${item.poster_path}`} class="card-img-top" alt="${
+          <img data-bs-toggle="modal" data-bs-target="#exampleModal" src=${`https://image.tmdb.org/t/p/w500/${item.poster_path}`} class="card-img-top" alt="${
         item.title
       }" />
         </div>
       `;
+
+      const imageCard = col.querySelector(".card-img-top");
+      imageCard.addEventListener("click", async () => {
+        const url = await getTrailerUrl(item);
+        const body = modalElement.querySelector(".modal-body");
+        body.innerHTML = `
+        <iframe
+          src="https://www.youtube.com/embed/${url}"
+          width="100%"
+          height="400px"
+          title="YouTube video player"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen
+        ></iframe>
+      `;
+      });
 
       row.appendChild(col);
     });
@@ -67,7 +101,17 @@ function renderCarousel(items) {
 
 renderCarousel(res.results);
 
-// const carousel = document.getElementById("inner-carousel");
+async function getTrailerUrl(movie) {
+  const type = movie.first_air_date ? "tv" : "movie";
+  const data = await getTrailerByIdAndType(movie.id, type);
+  const trailer = data.results.find(
+    (vid) => vid.type === "Trailer" && vid.site === "YouTube"
+  );
+  return trailer ? trailer.key : null;
+}
 
-// const slide = document.createElement("div");
-// slide.classList.add("carousel-item active");
+const modalElement = document.getElementById("exampleModal");
+modalElement.addEventListener("hidden.bs.modal", () => {
+  // Clear modal content
+  modalElement.querySelector(".modal-body").innerHTML = "";
+});

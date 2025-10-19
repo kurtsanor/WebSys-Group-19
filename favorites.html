@@ -67,6 +67,32 @@
       <section class="movies__grid" id="movies-grid"></section>
     </main>
 
+    <!-- Bootstrap Modal -->
+    <div
+      class="modal fade"
+      id="exampleModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">
+              Trailer Modal
+            </h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body"></div>
+        </div>
+      </div>
+    </div>
+
     <footer class="footer">
       <p class="footer__text">&copy; 2025 WatchThis. All rights reserved.</p>
     </footer>
@@ -76,6 +102,6 @@
       integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
       crossorigin="anonymous"
     ></script>
-    <script src="js/favorites.js"></script>
+    <script src="js/favorites.js" type="module"></script>
   </body>
 </html>
