@@ -3,6 +3,8 @@ import { getShowsByGenreAndPage, searchShowsByNameAndPage } from "./tvApi.js";
 const searchBar = document.getElementById("search-bar");
 const movieGrid = document.getElementById("movies-grid");
 
+let movies = [];
+
 document.addEventListener("DOMContentLoaded", async () => {
   const shows = await getShowsByGenreAndPage(0, 1);
   renderMovies(shows.results);
@@ -68,6 +70,66 @@ document.querySelectorAll(".page-item").forEach((item) => {
     }
   });
 });
+// localStorage.clear();
+function handleFavorite(movie) {
+  const stored = localStorage.getItem("favorites");
+  let favorites = stored ? JSON.parse(stored) : [];
+
+  if (favorites.some((fav) => fav.id == movie.id)) {
+    const updatedFavorites = favorites.filter((fav) => fav.id != movie.id);
+
+    console.log("favorite removed");
+    localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
+    rerenderFavorited(movie.id);
+    return;
+  }
+  favorites.push(movie);
+  console.log("fav added");
+  localStorage.setItem("favorites", JSON.stringify(favorites));
+
+  rerenderFavorited(movie.id);
+
+  // console.log(JSON.parse(localStorage.getItem("favorites")));
+}
+
+function rerenderFavorited(movieId) {
+  movieGrid.innerHTML = "";
+  const movieCards = movies.forEach((movie) => {
+    // movies.push(movie);
+    const card = document.createElement("div");
+    card.classList.add("movies__card");
+    card.innerHTML = `
+      <img class="movies__card-image" src=${`https://image.tmdb.org/t/p/w500/${movie.backdrop_path}`} />
+      <section class="movies__card-content">
+        <div>
+          <h3 class="movies__card-title fw-bold text-light">${
+            movie.title || movie.name
+          }</h3>
+          <p class="movies__card-description">${movie.overview}</p>
+        </div>
+        <div class="movies__card-footer">
+          <span class="movies__card-date">${
+            movie.release_date || movie.first_air_date
+          }</span>
+          <button class="movies__card-favorite-btn">${
+            isFavorite(movie.id) ? "❤️" : "🤍"
+          }</button>
+        </div>
+      </section>`;
+
+    const buttonFavorite = card.querySelector(".movies__card-favorite-btn");
+    buttonFavorite.addEventListener("click", () => handleFavorite(movie));
+
+    movieGrid.appendChild(card);
+  });
+}
+
+function isFavorite(movieId) {
+  const stored = localStorage.getItem("favorites");
+  const favorites = stored ? JSON.parse(stored) : [];
+
+  return favorites.some((fav) => fav.id == movieId);
+}
 
 async function searchShows() {
   const searchInput = searchBar.value;
@@ -76,9 +138,13 @@ async function searchShows() {
     ? await searchShowsByNameAndPage(searchInput, 1)
     : await getShowsByGenreAndPage(0, 1);
 
-  const shows = searched.results.map((movie) => {
-    return `
-    <div class="movies__card">
+  movies = [];
+  movieGrid.innerHTML = "";
+  const movieCards = searched.results.forEach((movie) => {
+    movies.push(movie);
+    const card = document.createElement("div");
+    card.classList.add("movies__card");
+    card.innerHTML = `
       <img class="movies__card-image" src=${`https://image.tmdb.org/t/p/w500/${movie.backdrop_path}`} />
       <section class="movies__card-content">
         <div>
@@ -91,18 +157,27 @@ async function searchShows() {
           <span class="movies__card-date">${
             movie.release_date || movie.first_air_date
           }</span>
-          <button class="movies__card-favorite-btn">💖</button>
+          <button class="movies__card-favorite-btn">${
+            isFavorite(movie.id) ? "❤️" : "🤍"
+          }</button>
         </div>
-      </section>
-    </div>`;
+      </section>`;
+
+    const buttonFavorite = card.querySelector(".movies__card-favorite-btn");
+    buttonFavorite.addEventListener("click", () => handleFavorite(movie));
+
+    movieGrid.appendChild(card);
   });
-  movieGrid.innerHTML = shows.join("");
 }
 
 function renderMovies(shows) {
-  const movieCards = shows.map((movie) => {
-    return `
-    <div class="movies__card">
+  movies = [];
+  movieGrid.innerHTML = "";
+  const movieCards = shows.forEach((movie) => {
+    movies.push(movie);
+    const card = document.createElement("div");
+    card.classList.add("movies__card");
+    card.innerHTML = `
       <img class="movies__card-image" src=${`https://image.tmdb.org/t/p/w500/${movie.backdrop_path}`} />
       <section class="movies__card-content">
         <div>
@@ -115,11 +190,16 @@ function renderMovies(shows) {
           <span class="movies__card-date">${
             movie.release_date || movie.first_air_date
           }</span>
-          <button class="movies__card-favorite-btn">💖</button>
+          <button class="movies__card-favorite-btn">${
+            isFavorite(movie.id) ? "❤️" : "🤍"
+          }</button>
         </div>
-      </section>
-    </div>`;
-  });
+      </section>`;
 
-  movieGrid.innerHTML = movieCards.join("");
+    const buttonFavorite = card.querySelector(".movies__card-favorite-btn");
+    buttonFavorite.addEventListener("click", () => handleFavorite(movie));
+
+    movieGrid.appendChild(card);
+  });
+  // movieGrid.innerHTML = movieCards.join("");
 }

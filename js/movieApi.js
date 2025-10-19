@@ -26,3 +26,17 @@ export async function searchMoviesByNameAndPage(searchQuery, page) {
     console.log(error);
   }
 }
+
+export async function getPlayingNowMovies() {
+  const url = `https://api.themoviedb.org/3/trending/all/week?api_key=${encodeURIComponent(
+    API_KEY
+  )}`;
+
+  try {
+    const res = await fetch(url);
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+}
