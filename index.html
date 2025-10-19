@@ -61,37 +61,31 @@
     </header>
 
     <!-- Hero Section -->
-    <section class="hero" id="hero-section">
-      <!-- <div class="hero__overlay"></div>
-      <img src="images/f4.jpg" alt="Fantastic 4" class="hero__image" />
-      <div class="hero__content">
-        <h1 class="hero__title">THE FANTASTIC 4: FIRST STEPS</h1>
-        <p class="hero__description">
-          Against the vibrant backdrop of a 1960s-inspired, retro-futuristic
-          world, Marvel's First Family is forced to balance their roles as
-          heroes with the strength of their family bond, while defending Earth
-          from a ravenous space god called Galactus...
-        </p>
-        <a href="#" class="hero__button--primary">▶ Watch</a>
-      </div> -->
-    </section>
+    <section class="hero" id="hero-section"></section>
 
     <!-- Trending Section -->
     <section class="trending">
       <h2 class="trending__title">Trending</h2>
-      <div class="trending__grid">
-        <div class="trending__card">
-          <img src="images/f4.jpg" alt="Movie 1" class="trending__image" />
-        </div>
-        <div class="trending__card">
-          <img src="images/f4.jpg" alt="Movie 2" class="trending__image" />
-        </div>
-        <div class="trending__card">
-          <img src="images/f4.jpg" alt="Movie 3" class="trending__image" />
-        </div>
-        <div class="trending__card">
-          <img src="images/f4.jpg" alt="Movie 4" class="trending__image" />
-        </div>
+      <div id="multiCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner" id="inner-carousel"></div>
+
+        <!-- Controls -->
+        <button
+          class="carousel-control-prev"
+          type="button"
+          data-bs-target="#multiCarousel"
+          data-bs-slide="prev"
+        >
+          <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button
+          class="carousel-control-next"
+          type="button"
+          data-bs-target="#multiCarousel"
+          data-bs-slide="next"
+        >
+          <span class="carousel-control-next-icon"></span>
+        </button>
       </div>
     </section>
 

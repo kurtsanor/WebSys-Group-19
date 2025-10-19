@@ -355,6 +355,26 @@ body {
   filter: brightness(0) invert(1);
 }
 
+/* Bootstrap css overrides */
+.card {
+  border: none;
+  box-shadow: none;
+  /* height: 400px; */
+}
+
+.card-img-top {
+  width: 100%; /* Stretch to full card width */
+  height: 250px; /* Set a consistent height */
+  object-fit: cover; /* Crop to fill without distortion */
+  border-radius: 0.5rem;
+  transition: ease 0.5s;
+}
+
+.card-img-top:hover {
+  cursor: pointer;
+  transform: scale(1.05); /* Slightly enlarge */
+}
+
 /* ===============================
    Responsive Adjustments
    - Adjusts movie grid for smaller screens
