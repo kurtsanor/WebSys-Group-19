@@ -66,8 +66,8 @@ document.querySelectorAll(".page-item").forEach((item) => {
 
       const shows =
         genre == 0
-          ? await getShowsByGenreAndPage(null, page)
-          : await getShowsByGenreAndPage(genre, page);
+          ? await getMoviesByGenreAndPage(null, page)
+          : await getMoviesByGenreAndPage(genre, page);
 
       renderMovies(shows.results);
     }
