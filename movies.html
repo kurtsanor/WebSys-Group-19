@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -61,7 +61,7 @@
     </header>
 
     <main class="movies">
-      <section class="movies__search">
+      <section class="movies__search mb-5">
         <input
           class="movies__search-bar"
           type="text"
@@ -71,24 +71,26 @@
       </section>
 
       <section class="movies__filter">
-        <ul class="movies__filter-list">
+        <ul class="list-group bg-dark list-group-horizontal">
           <li
-            class="movies__filter-item movies__filter-item--highlight"
+            class="list-group-item movies__filter-item active"
             data-genreId="0"
           >
             <a>All</a>
           </li>
-          <li class="movies__filter-item" data-genreId="28">
+          <li class="list-group-item movies__filter-item" data-genreId="28">
             <a>Action</a>
           </li>
-          <li class="movies__filter-item" data-genreId="35">
+          <li class="list-group-item movies__filter-item" data-genreId="35">
             <a>Comedy</a>
           </li>
-          <li class="movies__filter-item" data-genreId="18"><a>Drama</a></li>
-          <li class="movies__filter-item" data-genreId="27">
+          <li class="list-group-item movies__filter-item" data-genreId="18">
+            <a>Drama</a>
+          </li>
+          <li class="list-group-item movies__filter-item" data-genreId="27">
             <a>Horror</a>
           </li>
-          <li class="movies__filter-item" data-genreId="10749">
+          <li class="list-group-item movies__filter-item" data-genreId="10749">
             <a>Romance</a>
           </li>
         </ul>

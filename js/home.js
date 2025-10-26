@@ -17,7 +17,7 @@ hero.innerHTML = `
         <p class="hero__description">
           ${featuredMovie.overview}
         </p>
-        <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" class="hero__button--primary">▶ Watch</a>
+        <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" class="hero__button--primary btn">▶ Watch</a>
       </div>
       `;
 

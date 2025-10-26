@@ -21,9 +21,9 @@ document.querySelectorAll(".movies__filter-item").forEach((item) => {
   item.addEventListener("click", async () => {
     document
       .querySelectorAll(".movies__filter-item")
-      .forEach((li) => li.classList.remove("movies__filter-item--highlight"));
+      .forEach((li) => li.classList.remove("active"));
 
-    item.classList.add("movies__filter-item--highlight");
+    item.classList.add("active");
     const genreId = item.dataset.genreid;
 
     const shows =
@@ -81,24 +81,19 @@ function handleFavorite(movie) {
   if (favorites.some((fav) => fav.id == movie.id)) {
     const updatedFavorites = favorites.filter((fav) => fav.id != movie.id);
 
-    console.log("favorite removed");
     localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
     rerenderFavorited(movie.id);
     return;
   }
   favorites.push(movie);
-  console.log("fav added");
   localStorage.setItem("favorites", JSON.stringify(favorites));
 
   rerenderFavorited(movie.id);
-
-  // console.log(JSON.parse(localStorage.getItem("favorites")));
 }
 
 function rerenderFavorited(movieId) {
   movieGrid.innerHTML = "";
   const movieCards = movies.forEach((movie) => {
-    // movies.push(movie);
     const card = document.createElement("div");
     card.classList.add("movies__card");
     card.innerHTML = `
@@ -123,7 +118,7 @@ function rerenderFavorited(movieId) {
     const imageCard = card.querySelector(".movies__card-image");
     imageCard.addEventListener("click", async () => {
       const url = await getTrailerUrl(movie.id);
-      console.log;
+
       const body = modalElement.querySelector(".modal-body");
       body.innerHTML = `
         <iframe
@@ -190,7 +185,7 @@ async function searchShows() {
     const imageCard = card.querySelector(".movies__card-image");
     imageCard.addEventListener("click", async () => {
       const url = await getTrailerUrl(movie.id);
-      console.log;
+
       const body = modalElement.querySelector(".modal-body");
       body.innerHTML = `
         <iframe
@@ -269,7 +264,6 @@ function renderMovies(shows) {
 
     movieGrid.appendChild(card);
   });
-  // movieGrid.innerHTML = movieCards.join("");
 }
 
 async function getTrailerUrl(movieId) {

@@ -21,9 +21,9 @@ document.querySelectorAll(".movies__filter-item").forEach((item) => {
   item.addEventListener("click", async () => {
     document
       .querySelectorAll(".movies__filter-item")
-      .forEach((li) => li.classList.remove("movies__filter-item--highlight"));
+      .forEach((li) => li.classList.remove("active"));
 
-    item.classList.add("movies__filter-item--highlight");
+    item.classList.add("active");
     const genreId = item.dataset.genreid;
 
     const shows =
