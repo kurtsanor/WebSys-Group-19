@@ -2,16 +2,18 @@ import {
   getMoviesByGenreAndPage,
   searchMoviesByNameAndPage,
   getTrailerByIdAndType,
-} from "./movieApi.js";
+} from "./api/movieApi.js";
+import { renderMedia } from "./utils/mediaRenderer.js";
 
 const searchBar = document.getElementById("search-bar");
 const movieGrid = document.getElementById("movies-grid");
+const modalElement = document.getElementById("exampleModal");
 
-let movies = [];
-
+// render set of media on page load
 document.addEventListener("DOMContentLoaded", async () => {
-  const shows = await getMoviesByGenreAndPage(0, 1);
-  renderMovies(shows.results);
+  const result = await getMoviesByGenreAndPage(0, 1);
+  const media = result.results;
+  renderMedia(media, movieGrid, modalElement);
 
   searchBar.addEventListener("input", searchShows);
 });
@@ -31,7 +33,7 @@ document.querySelectorAll(".movies__filter-item").forEach((item) => {
         ? await getMoviesByGenreAndPage(genreId, 1)
         : await getMoviesByGenreAndPage(null, 1);
 
-    renderMovies(shows.results);
+    renderMedia(shows.results, movieGrid, modalElement);
   });
 });
 
@@ -45,9 +47,7 @@ document.querySelectorAll(".page-item").forEach((item) => {
     });
 
     // identify the chosen filter
-    const genre =
-      document.querySelector(".movies__filter-item--highlight").dataset
-        .genreid || null;
+    const genre = document.querySelector(".active").dataset.genreid || null;
 
     // get the number of the selected page
     const page = Number(item.querySelector("a").textContent);
@@ -69,86 +69,10 @@ document.querySelectorAll(".page-item").forEach((item) => {
           ? await getMoviesByGenreAndPage(null, page)
           : await getMoviesByGenreAndPage(genre, page);
 
-      renderMovies(shows.results);
+      renderMedia(shows.results, movieGrid, modalElement);
     }
   });
 });
-// localStorage.clear();
-function handleFavorite(movie) {
-  const stored = localStorage.getItem("favorites");
-  let favorites = stored ? JSON.parse(stored) : [];
-
-  if (favorites.some((fav) => fav.id == movie.id)) {
-    const updatedFavorites = favorites.filter((fav) => fav.id != movie.id);
-
-    localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
-    rerenderFavorited(movie.id);
-    return;
-  }
-  favorites.push(movie);
-  localStorage.setItem("favorites", JSON.stringify(favorites));
-
-  rerenderFavorited(movie.id);
-}
-
-function rerenderFavorited(movieId) {
-  movieGrid.innerHTML = "";
-  const movieCards = movies.forEach((movie) => {
-    const card = document.createElement("div");
-    card.classList.add("movies__card");
-    card.innerHTML = `
-      <img data-bs-toggle="modal" data-bs-target="#exampleModal" class="movies__card-image" src=${`https://image.tmdb.org/t/p/w500/${movie.backdrop_path}`} />
-      <section class="movies__card-content">
-        <div>
-          <h3 class="movies__card-title fw-bold text-light">${
-            movie.title || movie.name
-          }</h3>
-          <p class="movies__card-description">${movie.overview}</p>
-        </div>
-        <div class="movies__card-footer">
-          <span class="movies__card-date">${
-            movie.release_date || movie.first_air_date
-          }</span>
-          <button class="movies__card-favorite-btn">${
-            isFavorite(movie.id) ? "❤️" : "🤍"
-          }</button>
-        </div>
-      </section>`;
-
-    const imageCard = card.querySelector(".movies__card-image");
-    imageCard.addEventListener("click", async () => {
-      const url = await getTrailerUrl(movie.id);
-
-      const body = modalElement.querySelector(".modal-body");
-      body.innerHTML = `
-        <iframe
-          src="https://www.youtube.com/embed/${url}"
-          width="100%"
-          height="400px"
-          title="YouTube video player"
-          frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowfullscreen
-        ></iframe>
-      `;
-    });
-
-    const buttonFavorite = card.querySelector(".movies__card-favorite-btn");
-    buttonFavorite.addEventListener("click", (e) => {
-      e.stopPropagation();
-      handleFavorite(movie);
-    });
-
-    movieGrid.appendChild(card);
-  });
-}
-
-function isFavorite(movieId) {
-  const stored = localStorage.getItem("favorites");
-  const favorites = stored ? JSON.parse(stored) : [];
-
-  return favorites.some((fav) => fav.id == movieId);
-}
 
 async function searchShows() {
   const searchInput = searchBar.value;
@@ -157,123 +81,10 @@ async function searchShows() {
     ? await searchMoviesByNameAndPage(searchInput, 1)
     : await getMoviesByGenreAndPage(0, 1);
 
-  movies = [];
-  movieGrid.innerHTML = "";
-  const movieCards = searched.results.forEach((movie) => {
-    movies.push(movie);
-    const card = document.createElement("div");
-    card.classList.add("movies__card");
-    card.innerHTML = `
-      <img data-bs-toggle="modal" data-bs-target="#exampleModal" class="movies__card-image" src=${`https://image.tmdb.org/t/p/w500/${movie.backdrop_path}`} />
-      <section class="movies__card-content">
-        <div>
-          <h3 class="movies__card-title fw-bold text-light">${
-            movie.title || movie.name
-          }</h3>
-          <p class="movies__card-description">${movie.overview}</p>
-        </div>
-        <div class="movies__card-footer">
-          <span class="movies__card-date">${
-            movie.release_date || movie.first_air_date
-          }</span>
-          <button class="movies__card-favorite-btn">${
-            isFavorite(movie.id) ? "❤️" : "🤍"
-          }</button>
-        </div>
-      </section>`;
-
-    const imageCard = card.querySelector(".movies__card-image");
-    imageCard.addEventListener("click", async () => {
-      const url = await getTrailerUrl(movie.id);
-
-      const body = modalElement.querySelector(".modal-body");
-      body.innerHTML = `
-        <iframe
-          src="https://www.youtube.com/embed/${url}"
-          width="100%"
-          height="400px"
-          title="YouTube video player"
-          frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowfullscreen
-        ></iframe>
-      `;
-    });
-
-    const buttonFavorite = card.querySelector(".movies__card-favorite-btn");
-    buttonFavorite.addEventListener("click", (e) => {
-      e.stopPropagation();
-      handleFavorite(movie);
-    });
-
-    movieGrid.appendChild(card);
-  });
+  renderMedia(searched.results, movieGrid, modalElement);
 }
 
-const modalElement = document.getElementById("exampleModal");
-
-function renderMovies(shows) {
-  movies = [];
-  movieGrid.innerHTML = "";
-  const movieCards = shows.forEach((movie) => {
-    movies.push(movie);
-    const card = document.createElement("div");
-    card.classList.add("movies__card");
-    card.innerHTML = `
-      <img data-bs-toggle="modal" data-bs-target="#exampleModal" class="movies__card-image" src=${`https://image.tmdb.org/t/p/w500/${movie.backdrop_path}`} />
-      <section class="movies__card-content">
-        <div>
-          <h3 class="movies__card-title fw-bold text-light">${
-            movie.title || movie.name
-          }</h3>
-          <p class="movies__card-description">${movie.overview}</p>
-        </div>
-        <div class="movies__card-footer">
-          <span class="movies__card-date">${
-            movie.release_date || movie.first_air_date
-          }</span>
-          <button class="movies__card-favorite-btn">${
-            isFavorite(movie.id) ? "❤️" : "🤍"
-          }</button>
-        </div>
-      </section>`;
-
-    const imageCard = card.querySelector(".movies__card-image");
-    imageCard.addEventListener("click", async () => {
-      const url = await getTrailerUrl(movie.id);
-      console.log;
-      const body = modalElement.querySelector(".modal-body");
-      body.innerHTML = `
-        <iframe
-          src="https://www.youtube.com/embed/${url}"
-          width="100%"
-          height="400px"
-          title="YouTube video player"
-          frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowfullscreen
-        ></iframe>
-      `;
-    });
-
-    const buttonFavorite = card.querySelector(".movies__card-favorite-btn");
-    buttonFavorite.addEventListener("click", (e) => {
-      e.stopPropagation();
-      handleFavorite(movie);
-    });
-
-    movieGrid.appendChild(card);
-  });
-}
-
-async function getTrailerUrl(movieId) {
-  const data = await getTrailerByIdAndType(movieId, "movie");
-  const trailer = data.results.find(
-    (vid) => vid.type === "Trailer" && vid.site === "YouTube"
-  );
-  return trailer ? trailer.key : null;
-}
-
+// listener to clear data of modal after closed
 modalElement.addEventListener("hidden.bs.modal", () => {
   // Clear modal content
   modalElement.querySelector(".modal-body").innerHTML = "";

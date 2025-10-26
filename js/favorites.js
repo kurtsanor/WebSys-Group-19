@@ -1,4 +1,4 @@
-import { getTrailerByIdAndType } from "./movieApi.js";
+import { getTrailerByIdAndType } from "./api/movieApi.js";
 
 const movieGrid = document.getElementById("movies-grid");
 
@@ -23,14 +23,13 @@ function handleFavorite(movie) {
   if (favorites.some((fav) => fav.id == movie.id)) {
     const updatedFavorites = favorites.filter((fav) => fav.id != movie.id);
 
-    console.log("favorite removed");
     localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
     const newFavorites = getFavorites();
     renderMovies(newFavorites);
     return;
   }
   favorites.push(movie);
-  console.log("fav added");
+
   localStorage.setItem("favorites", JSON.stringify(favorites));
 
   const newFavorites = getFavorites();
@@ -85,7 +84,6 @@ function renderMovies(shows) {
 
     movieGrid.appendChild(card);
   });
-  // movieGrid.innerHTML = movieCards.join("");
 }
 
 const favorites = getFavorites();
