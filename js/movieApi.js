@@ -1,6 +1,13 @@
-const API_KEY = "368c646199ed46c46b08bced54349719";
+let API_KEY;
+
+const configPromise = fetch("./config.json")
+  .then((res) => res.json())
+  .then((config) => {
+    API_KEY = config.TMDB_API_KEY;
+  });
 
 export async function getMoviesByGenreAndPage(genre, page) {
+  await configPromise;
   const url = genre
     ? `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&page=${page}&sort_by=popularity.desc&with_genres=${genre}}`
     : `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&page=${page}&sort_by=popularity.desc`;
@@ -14,6 +21,7 @@ export async function getMoviesByGenreAndPage(genre, page) {
 }
 
 export async function searchMoviesByNameAndPage(searchQuery, page) {
+  await configPromise;
   const searchUrl = `https://api.themoviedb.org/3/search/movie?query=${encodeURIComponent(
     searchQuery
   )}&api_key=${encodeURIComponent(API_KEY)}&page=${page}`;
@@ -28,6 +36,7 @@ export async function searchMoviesByNameAndPage(searchQuery, page) {
 }
 
 export async function getPlayingNowMovies() {
+  await configPromise;
   const url = `https://api.themoviedb.org/3/trending/all/week?api_key=${encodeURIComponent(
     API_KEY
   )}`;
@@ -42,6 +51,7 @@ export async function getPlayingNowMovies() {
 }
 
 export async function getTrailerByIdAndType(movieId, type) {
+  await configPromise;
   const url = `https://api.themoviedb.org/3/${type}/${encodeURIComponent(
     movieId
   )}/videos?api_key=${encodeURIComponent(API_KEY)}&language=en-US`;
