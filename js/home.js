@@ -1,4 +1,4 @@
-import { getPlayingNowMovies, getTrailerByIdAndType } from "./movieApi.js";
+import { getPlayingNowMovies, getTrailerByIdAndType } from "./api/movieApi.js";
 
 const heroSection = document.getElementById("hero-section");
 
